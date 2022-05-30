@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor, ReactNode } from 'react';
+import React, { HTMLAttributes, JSXElementConstructor, ReactNode } from 'react';
 import Input from './Input';
 import Label from './Label';
 
@@ -9,17 +9,19 @@ interface IForm
   Label: typeof Label;
 }
 
-interface FormProps {
+interface FormProps extends HTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
 
-const Form: React.FC<any> & {
-  FormGroup: typeof FormGroup;
-  Input: typeof Input;
-  Label: typeof Label;
-} = React.forwardRef<HTMLFormElement, FormProps>(({ children }, ref) => {
-  return <form ref={ref}>{children}</form>;
+const Form: IForm = React.forwardRef<HTMLFormElement, FormProps>(({ children, ...props }, ref) => {
+  return (
+    <form ref={ref} {...props}>
+      {children}
+    </form>
+  );
 }) as IForm;
+
+Form.displayName = 'Form';
 
 // TODO : addons넣어야 할 수도 있다.
 

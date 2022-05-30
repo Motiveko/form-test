@@ -5,7 +5,8 @@ const prod = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: prod ? 'production' : 'development',
-  devtool: prod ? 'hidden-source-map' : 'eval',
+  devtool: 'source-map',
+
   entry: './src/index.tsx',
   resolve: {
     // 모듈 해석 방식 정의, 확장자(extensions), 경로(modules) 등 명시해줘야한다. 경로는 기본적으로 잘 인식하는듯

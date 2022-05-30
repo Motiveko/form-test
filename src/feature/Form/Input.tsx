@@ -17,21 +17,32 @@ const Input: React.FC<InputProps> = ({
   disabled = false,
   icon,
   type = 'text',
+  onChange,
+  onBlur,
+  value,
   ...props
 }) => {
+  console.log({ ...props });
   const classNames = [
     'input',
     disabled ? '' : `is-${color}`,
     `is-${size}`,
     rounded ? 'is-rounded' : '',
   ].join(' ');
-
+  console.log('랜더링');
   return (
     <div className="field">
-      <input className={classNames} type={type} disabled={disabled} {...props} />
+      <input
+        className={classNames}
+        type={type}
+        disabled={disabled}
+        onChange={onChange}
+        onBlur={onBlur}
+        // value={value}  // value를 안주면 에러가 안나고 주면 에러가난다, 어떻게 이런일이..
+        {...props}
+      />
       {icon && icon()}
     </div>
   );
 };
-
 export default Input;
